@@ -9,7 +9,7 @@ class BureauController extends Controller
 {
     public function index()
     {
-        return response()->json(Bureau::all());
+        return response()->json(Bureau::with('fonctionnaires')->get());
     }
 
     public function store(Request $request)

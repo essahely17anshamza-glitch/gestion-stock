@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bureau extends Model
 {
+    protected $table = 'bureaux';
     protected $fillable = ['nom'];
 
     public function fonctionnaires()

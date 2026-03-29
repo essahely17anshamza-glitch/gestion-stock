@@ -15,12 +15,12 @@ class Categorie extends Model
 
     public function getNombreArticles()
     {
-        return $this->articles()->count();
+        return $this->articles->count();
     }
 
     public function getPiecesEntrees()
     {
-        return $this->articles()->sum('quantite_entree');
+        return $this->articles->sum('quantite_entree');
     }
 
     public function getPiecesSortantes()

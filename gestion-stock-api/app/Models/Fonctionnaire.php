@@ -20,11 +20,11 @@ class Fonctionnaire extends Model
 
     public function getArticlesActuels()
     {
-        return $this->transferts()->with('article')->get()->filter(fn($t) => !$t->retour);
+        return $this->transferts()->with('article')->get();
     }
 
     public function getHistorique()
     {
-        return $this->transferts()->with(['article', 'bureau', 'retour'])->get();
+        return $this->transferts()->with(['article', 'bureau'])->get();
     }
 }

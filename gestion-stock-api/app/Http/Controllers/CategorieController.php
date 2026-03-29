@@ -9,7 +9,7 @@ class CategorieController extends Controller
 {
     public function index()
     {
-        $categories = Categorie::all()->map(function ($cat) {
+        $categories = Categorie::with('articles.transferts')->get()->map(function ($cat) {
             return [
                 'id' => $cat->id,
                 'nom' => $cat->nom,

@@ -7,7 +7,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BureauController;
 use App\Http\Controllers\FonctionnaireController;
 use App\Http\Controllers\TransfertController;
-use App\Http\Controllers\RetourController;
+
 
 // Auth
 Route::post('/login', [AuthController::class, 'login']);
@@ -44,10 +44,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/fonctionnaires/search', [FonctionnaireController::class, 'search']);
 
     // Transferts
+    Route::get('/transferts', [TransfertController::class, 'globalIndex']);
     Route::get('/articles/{article_id}/transferts', [TransfertController::class, 'index']);
     Route::post('/transferts', [TransfertController::class, 'store']);
     Route::delete('/transferts/{id}', [TransfertController::class, 'destroy']);
 
-    // Retours
-    Route::post('/retours', [RetourController::class, 'store']);
+
 });

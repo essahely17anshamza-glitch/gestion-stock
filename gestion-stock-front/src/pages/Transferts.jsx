@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { getTransferts, createTransfert, deleteTransfert } from '../api/transferts'
+import { getTransferts, createTransfert, deleteTransfert, getAllTransferts } from '../api/transferts'
 import { getArticles } from '../api/articles'
 import { getBureaux } from '../api/bureaux'
 import { getFonctionnaires } from '../api/fonctionnaires'
@@ -31,8 +31,9 @@ function Transferts() {
     const loadData = async () => {
         try {
         setLoading(true)
+        const transfertsReq = articleId ? getTransferts(articleId) : getAllTransferts()
         const [transfertsRes, bureauxRes, fonctionnairesRes] = await Promise.all([
-            getTransferts(articleId),
+            transfertsReq,
             getBureaux(),
             getFonctionnaires()
         ])
@@ -111,18 +112,20 @@ function Transferts() {
     return (
         <div>
         {/* Back Button */}
-        <button
-            onClick={() => navigate(-1)}
-            style={{ marginBottom: '20px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b' }}
-        >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Retour
-        </button>
+        {articleId && (
+            <button
+                onClick={() => navigate(-1)}
+                style={{ marginBottom: '20px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', color: '#64748b' }}
+            >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Retour
+            </button>
+        )}
 
         {/* Header */}
         <div style={{ marginBottom: '24px' }}>
             <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0f172a', marginBottom: '4px' }}>
-            Transferts - {article?.nom || `Article #${articleId}`}
+            {articleId ? `Transferts - ${article?.nom || `Article #${articleId}`}` : 'Tous les Transferts'}
             </h2>
             <p style={{ fontSize: '13px', color: '#64748b' }}>Historique des mouvements de stock</p>
         </div>
@@ -143,13 +146,15 @@ function Transferts() {
         <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden', marginBottom: '24px' }}>
             <div style={{ padding: '16px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fafbfc' }}>
             <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>Historique des transferts</span>
-            <button
-                onClick={() => setShowForm(true)}
-                style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '13px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Nouveau transfert
-            </button>
+            {articleId && (
+                <button
+                    onClick={() => setShowForm(true)}
+                    style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '13px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Nouveau transfert
+                </button>
+            )}
             </div>
 
             <div style={{ overflowX: 'auto' }}>
@@ -157,6 +162,7 @@ function Transferts() {
                 <thead>
                 <tr>
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Réf. BR</th>
+                    {!articleId && <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Article</th>}
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Date</th>
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Quantité</th>
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Bureau</th>
@@ -169,6 +175,7 @@ function Transferts() {
                 {transferts.map(t => (
                     <tr key={t.id}>
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}><strong style={{ color: '#0f172a' }}>{t.reference_br}</strong></td>
+                    {!articleId && <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', fontWeight: 500, color: '#c9a03d' }}>{t.article?.nom || '-'}</td>}
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>{t.date_transfert?.split('-').reverse().join('/')}</td>
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>{t.quantite}</td>
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>{getBureauName(t.bureau_id)}</td>
@@ -183,7 +190,7 @@ function Transferts() {
                 ))}
                 {transferts.length === 0 && (
                     <tr>
-                    <td colSpan="7" style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
+                    <td colSpan={articleId ? "7" : "8"} style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ margin: '0 auto 12px', opacity: 0.5 }}>
                         <path d="M7 7h10v10"/><path d="M7 17 17 7"/>
                         </svg>

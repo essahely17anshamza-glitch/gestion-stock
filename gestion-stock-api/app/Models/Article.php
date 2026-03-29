@@ -27,9 +27,7 @@ class Article extends Model
 
     public function getQuantiteSortie()
     {
-        $sorties = $this->transferts()->sum('quantite');
-        $retours = Retour::whereIn('transfert_id', $this->transferts()->pluck('id'))->sum('quantite');
-        return $sorties - $retours;
+        return $this->transferts->sum('quantite');
     }
 
     public function getStockRestant()

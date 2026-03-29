@@ -31,10 +31,7 @@ class Transfert extends Model
         return $this->belongsTo(Fonctionnaire::class);
     }
 
-    public function retour()
-    {
-        return $this->hasOne(Retour::class);
-    }
+
 
     public static function genererReference()
     {

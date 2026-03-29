@@ -33,7 +33,14 @@ function App() {
       } />
       <Route path="/categories/:id/articles/:articleId/transferts" element={
         <PrivateRoute>
-          <Layout pageTitle="Transferts" pageSub="Mouvements de stock vers les bureaux">
+          <Layout pageTitle="Transferts de l'article" pageSub="Mouvements de stock vers les bureaux">
+            <Transferts />
+          </Layout>
+        </PrivateRoute>
+      } />
+      <Route path="/transferts" element={
+        <PrivateRoute>
+          <Layout pageTitle="Tous les Transferts" pageSub="Historique global des mouvements de stock">
             <Transferts />
           </Layout>
         </PrivateRoute>

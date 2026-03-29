@@ -10,7 +10,15 @@ class TransfertController extends Controller
     public function index($article_id)
     {
         $transferts = Transfert::where('article_id', $article_id)
-            ->with(['bureau', 'fonctionnaire', 'retour'])
+            ->with(['bureau', 'fonctionnaire'])
+            ->get();
+        return response()->json($transferts);
+    }
+
+    public function globalIndex()
+    {
+        $transferts = Transfert::with(['article', 'bureau', 'fonctionnaire'])
+            ->orderBy('date_transfert', 'desc')
             ->get();
         return response()->json($transferts);
     }

@@ -9,7 +9,7 @@ class ArticleController extends Controller
 {
     public function index($categorie_id)
     {
-        $articles = Article::where('categorie_id', $categorie_id)->get()->map(function ($a) {
+        $articles = Article::where('categorie_id', $categorie_id)->with('transferts')->get()->map(function ($a) {
             return [
                 'id' => $a->id,
                 'nom' => $a->nom,
@@ -54,7 +54,7 @@ class ArticleController extends Controller
     public function search(Request $request)
     {
         $query = $request->get('q');
-        $articles = Article::where('nom', 'like', "%$query%")->with('categorie')->get()->map(function ($a) {
+        $articles = Article::where('nom', 'like', "%$query%")->with(['categorie', 'transferts'])->get()->map(function ($a) {
             return [
                 'id' => $a->id,
                 'nom' => $a->nom,
