@@ -23,6 +23,14 @@ function Transferts() {
     })
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
+    const [printTransfert, setPrintTransfert] = useState(null)
+
+    const handlePrint = (transfert) => {
+        setPrintTransfert(transfert);
+        setTimeout(() => {
+            window.print();
+        }, 100);
+    }
 
     useEffect(() => {
         loadData()
@@ -168,7 +176,7 @@ function Transferts() {
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Bureau</th>
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Destinataire</th>
                     <th style={{ textAlign: 'left', padding: '12px 16px', fontSize: '11px', fontWeight: 600, color: '#64748b', borderBottom: '1px solid #e2e8f0' }}>Remarques</th>
-                    <th style={{ width: '80px' }}>Actions</th>
+                    <th style={{ width: '100px', textAlign: 'center' }}>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -181,9 +189,12 @@ function Transferts() {
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>{getBureauName(t.bureau_id)}</td>
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>{getFonctionnaireName(t.fonctionnaire_id)}</td>
                     <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', color: '#64748b', fontSize: '12px' }}>{t.remarques || '—'}</td>
-                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9' }}>
-                        <button onClick={() => handleDelete(t.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#64748b' }}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><polyline points="3 6 5 6 21 6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    <td style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                        <button onClick={() => handlePrint(t)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: 'var(--accent)' }} title="Imprimer le bon de réception">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                        </button>
+                        <button onClick={() => handleDelete(t.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#64748b' }} title="Supprimer">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><polyline points="3 6 5 6 21 6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
                         </button>
                     </td>
                     </tr>
@@ -247,6 +258,66 @@ function Transferts() {
                 </form>
             </div>
             </div>
+        )}
+
+        {/* Print Template (Hidden unless printing) */}
+        {printTransfert && (
+          <div className="print-area">
+            <div className="receipt-box">
+              <div style={{ textAlign: 'center', marginBottom: '30px', borderBottom: '2px solid #000', paddingBottom: '20px' }}>
+                <h1 style={{ margin: '0 0 10px 0', fontSize: '24px', textTransform: 'uppercase' }}>Commune Al Marsa</h1>
+                <h2 style={{ margin: 0, fontSize: '20px', color: '#333' }}>Bon de Réception</h2>
+              </div>
+              
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px', fontSize: '14px' }}>
+                <div>
+                  <p><strong>Réf:</strong> {printTransfert.reference_br}</p>
+                  <p><strong>Date:</strong> {printTransfert.date_transfert?.split('-').reverse().join('/')}</p>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <p><strong>Bureau:</strong> {getBureauName(printTransfert.bureau_id)}</p>
+                  <p><strong>Bénéficiaire:</strong> {getFonctionnaireName(printTransfert.fonctionnaire_id)}</p>
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '40px' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #000' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: '#f0f0f0' }}>
+                      <th style={{ border: '1px solid #000', padding: '10px', textAlign: 'left', color: '#000', borderRadius: 0 }}>Article Transféré</th>
+                      <th style={{ border: '1px solid #000', padding: '10px', textAlign: 'center', width: '100px', color: '#000', borderRadius: 0 }}>Quantité</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style={{ border: '1px solid #000', padding: '15px 10px', background: 'transparent' }}>
+                         {printTransfert.article ? printTransfert.article.nom : (article ? article.nom : '-')}
+                         {printTransfert.remarques && <div style={{ fontSize: '12px', marginTop: '5px', color: '#555' }}>Note: {printTransfert.remarques}</div>}
+                      </td>
+                      <td style={{ border: '1px solid #000', padding: '15px 10px', textAlign: 'center', fontWeight: 'bold', background: 'transparent' }}>
+                         {printTransfert.quantite}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '60px' }}>
+                <div style={{ width: '40%', textAlign: 'center' }}>
+                  <p style={{ fontWeight: 'bold', marginBottom: '60px' }}>Signature de l'employé(e)</p>
+                  <div style={{ borderBottom: '1px dotted #000', width: '80%', margin: '0 auto' }}></div>
+                </div>
+                <div style={{ width: '40%', textAlign: 'center' }}>
+                  <p style={{ fontWeight: 'bold', marginBottom: '60px' }}>Signature du Responsable Stock</p>
+                  <div style={{ borderBottom: '1px dotted #000', width: '80%', margin: '0 auto' }}></div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: '80px', textAlign: 'center', fontSize: '11px', color: '#666' }}>
+                <p>Ce bon de réception fait office de décharge pour le matériel reçu.</p>
+              </div>
+            </div>
+          </div>
         )}
         </div>
     )

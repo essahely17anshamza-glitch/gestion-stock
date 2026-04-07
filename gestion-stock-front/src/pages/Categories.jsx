@@ -132,43 +132,43 @@ function Categories() {
         <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: '20px',
+            gap: '24px',
             marginBottom: '32px'
         }}>
-            <div style={{ background: 'white', borderRadius: '12px', padding: '20px', border: '1px solid #e2e8f0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase' }}>Catégories</span>
+            <div className="card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Catégories</span>
                 <Icons.categories />
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: '#0f172a' }}>{stats.totalCategories}</div>
-            <div style={{ fontSize: '12px', color: '#64748b' }}>Total</div>
+            <div style={{ fontSize: '36px', fontWeight: 700, color: 'var(--text-heading)', letterSpacing: '-1px' }}>{stats.totalCategories}</div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>Total</div>
             </div>
 
-            <div style={{ background: 'white', borderRadius: '12px', padding: '20px', border: '1px solid #e2e8f0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase' }}>Articles</span>
+            <div className="card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Articles</span>
                 <Icons.articles />
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: '#0f172a' }}>{stats.totalArticles}</div>
-            <div style={{ fontSize: '12px', color: '#64748b' }}>Tous articles</div>
+            <div style={{ fontSize: '36px', fontWeight: 700, color: 'var(--text-heading)', letterSpacing: '-1px' }}>{stats.totalArticles}</div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>Tous articles</div>
             </div>
 
-            <div style={{ background: 'white', borderRadius: '12px', padding: '20px', border: '1px solid #e2e8f0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase' }}>En Stock</span>
+            <div className="card glass-panel" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>En Stock</span>
                 <Icons.stock />
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: '#0f172a' }}>{stats.totalStock}</div>
-            <div style={{ fontSize: '12px', color: '#64748b' }}>Unités disponibles</div>
+            <div style={{ fontSize: '36px', fontWeight: 700, color: 'var(--accent-dark)', letterSpacing: '-1px' }}>{stats.totalStock}</div>
+            <div style={{ fontSize: '13px', color: 'var(--text-main)', marginTop: '4px', fontWeight: 500 }}>Unités disponibles</div>
             </div>
 
-            <div style={{ background: 'white', borderRadius: '12px', padding: '20px', border: '1px solid #e2e8f0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                <span style={{ fontSize: '12px', fontWeight: 500, color: '#64748b', textTransform: 'uppercase' }}>Transférées</span>
+            <div className="card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Transférées</span>
                 <Icons.transfers />
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 700, color: '#0f172a' }}>{stats.totalSorties}</div>
-            <div style={{ fontSize: '12px', color: '#64748b' }}>Unités sorties</div>
+            <div style={{ fontSize: '36px', fontWeight: 700, color: 'var(--text-heading)', letterSpacing: '-1px' }}>{stats.totalSorties}</div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>Unités sorties</div>
             </div>
         </div>
 
@@ -183,15 +183,14 @@ function Categories() {
             </div>
         )}
 
-        {/* Categories Table */}
-        <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-            <div style={{ padding: '16px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fafbfc' }}>
-            <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>Liste des catégories</span>
+        <div className="card" style={{ overflow: 'hidden' }}>
+            <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-main)' }}>
+            <span style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-heading)' }}>Liste des catégories</span>
             <button
+                className="btn-primary"
                 onClick={() => { setShowForm(true); setEditingId(null); setFormData({ nom: '' }) }}
-                style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '13px', fontWeight: 500, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
             >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="12" y1="5" x2="12" y2="19"/>
                 <line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
@@ -199,15 +198,15 @@ function Categories() {
             </button>
             </div>
 
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: 0 }}>
             <thead>
                 <tr>
-                <th style={{ textAlign: 'left', padding: '12px 20px', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', borderBottom: '1px solid #e2e8f0' }}>Catégorie</th>
-                <th style={{ textAlign: 'left', padding: '12px 20px', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', borderBottom: '1px solid #e2e8f0' }}>Articles</th>
-                <th style={{ textAlign: 'left', padding: '12px 20px', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', borderBottom: '1px solid #e2e8f0' }}>Entrées</th>
-                <th style={{ textAlign: 'left', padding: '12px 20px', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', borderBottom: '1px solid #e2e8f0' }}>Sorties</th>
-                <th style={{ textAlign: 'left', padding: '12px 20px', fontSize: '11px', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', borderBottom: '1px solid #e2e8f0' }}>Stock</th>
-                <th style={{ width: '80px' }}>Actions</th>
+                <th>Catégorie</th>
+                <th>Articles</th>
+                <th>Entrées</th>
+                <th>Sorties</th>
+                <th>Stock</th>
+                <th style={{ width: '100px', textAlign: 'center' }}>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -263,25 +262,29 @@ function Categories() {
         {showForm && (
             <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
+            background: 'rgba(15, 23, 42, 0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000,
+            backdropFilter: 'blur(4px)'
             }}>
-            <div style={{ background: 'white', borderRadius: '16px', width: '450px', maxWidth: '90%', padding: '24px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <h3 style={{ fontSize: '18px', fontWeight: 600, margin: 0 }}>{editingId ? 'Modifier la catégorie' : 'Nouvelle catégorie'}</h3>
-                <button onClick={() => setShowForm(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '20px', color: '#64748b' }}>×</button>
+            <div className="card glass-panel" style={{ width: '480px', maxWidth: '90%', padding: '32px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                <h3 style={{ fontSize: '20px', fontWeight: 700, margin: 0, letterSpacing: '-0.5px' }}>{editingId ? 'Modifier la catégorie' : 'Nouvelle catégorie'}</h3>
+                <button onClick={() => setShowForm(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '24px', color: 'var(--text-muted)', transition: 'var(--transition)' }} onMouseEnter={e=>e.currentTarget.style.color='var(--text-heading)'} onMouseLeave={e=>e.currentTarget.style.color='var(--text-muted)'}>&times;</button>
                 </div>
                 <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={formData.nom}
-                    onChange={(e) => setFormData({ nom: e.target.value.toUpperCase() })}
-                    placeholder="ex: ÉQUIPEMENT INFORMATIQUE"
-                    style={{ width: '100%', padding: '10px 12px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '14px', fontFamily: 'inherit', marginBottom: '20px' }}
-                    autoFocus
-                />
+                <div style={{ marginBottom: '24px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, marginBottom: '8px', color: 'var(--text-heading)' }}>Nom de la catégorie</label>
+                    <input
+                        type="text"
+                        className="premium-input"
+                        value={formData.nom}
+                        onChange={(e) => setFormData({ nom: e.target.value.toUpperCase() })}
+                        placeholder="ex: ÉQUIPEMENT INFORMATIQUE"
+                        autoFocus
+                    />
+                </div>
                 <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-                    <button type="button" onClick={() => setShowForm(false)} style={{ padding: '8px 16px', background: '#f1f5f9', border: 'none', borderRadius: '8px', fontSize: '13px', cursor: 'pointer' }}>Annuler</button>
-                    <button type="submit" style={{ padding: '8px 20px', background: '#0f172a', color: 'white', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 500, cursor: 'pointer' }}>{editingId ? 'Modifier' : 'Créer'}</button>
+                    <button type="button" onClick={() => setShowForm(false)} style={{ padding: '10px 20px', background: 'var(--bg-main)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', fontSize: '14px', fontWeight: 500, cursor: 'pointer', transition: 'var(--transition)' }}>Annuler</button>
+                    <button type="submit" className="btn-accent">{editingId ? 'Modifier' : 'Créer'}</button>
                 </div>
                 </form>
             </div>
