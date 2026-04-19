@@ -130,13 +130,7 @@ function Transferts() {
             </button>
         )}
 
-        {/* Header */}
-        <div style={{ marginBottom: '24px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0f172a', marginBottom: '4px' }}>
-            {articleId ? `Transferts - ${article?.nom || `Article #${articleId}`}` : 'Tous les Transferts'}
-            </h2>
-            <p style={{ fontSize: '13px', color: '#64748b' }}>Historique des mouvements de stock</p>
-        </div>
+        
 
         {error && (
             <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '8px', padding: '12px', marginBottom: '20px', color: '#dc2626', fontSize: '13px' }}>

@@ -48,11 +48,6 @@ function Recherche() {
 
     return (
         <div>
-        <div style={{ marginBottom: '24px' }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 600, color: '#0f172a', marginBottom: '4px' }}>Recherche</h2>
-            <p style={{ fontSize: '13px', color: '#64748b' }}>Rechercher par article ou par fonctionnaire</p>
-        </div>
-
         {/* Tabs */}
         <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', background: 'white', padding: '4px', borderRadius: '12px', border: '1px solid #e2e8f0', width: 'fit-content' }}>
             <button
